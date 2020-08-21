@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
@@ -14,6 +13,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -26,8 +30,28 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    // butterknife
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    //支持浏览器查看数据库数据，如果不需要可以去掉
+    debugImplementation "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
+    releaseImplementation "io.objectbox:objectbox-android:$objectboxVersion"
+//    // 如果只是用java开发
+//     implementation "io.objectbox:objectbox-android:$objectboxVersion"
+//    // apt
+//     annotationProcessor "io.objectbox:objectbox-processor:$objectboxVersion"
 
+//    // 如果支持kotlin开发
+//    // objectbox-kotlin包含objectbox-android
+//    implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
+//    // 当使用Kotlin时使用kapt(kapt包含apt功能):
+//    kapt "io.objectbox:objectbox-processor:$objectboxVersion"
 }
+//支持浏览器查看数据库数据的时候一定放在dependencies代码块下，不然会报错！！！
+//平时放在apply plugin: 'com.android.application'下面
+//将库添加到调试配置中，将库添加到发布配置中。确保在依赖项块之后还应用“io.objectbox”插件：
+apply plugin: 'io.objectbox' // after applying Android plugin

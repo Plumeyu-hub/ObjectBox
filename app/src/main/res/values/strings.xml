@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ObjectBox</string>
+    <string name="enter_new_note">Enter new note</string>
+    <string name="add">Add</string>
+    <string name="click_a_note_to_remove_it">Click a note to remove it</string>
 </resources>
